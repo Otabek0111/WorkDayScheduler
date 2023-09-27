@@ -24,15 +24,15 @@ function timeBlock() {
     }
   });
 }
-// Using jQuery
-$(".saveBtn").on("click", function () {
-  // Get nearby values of the description in jQuery
-  var textValue = $(this).siblings(".description").val();
-  // Get the id attribute of the parent div element
-  var timeId = $(this).parent().attr("id");
-  // Save in local storage
-  localStorage.setItem(timeId, textValue);
-});
+// // Using jQuery
+// $(".saveBtn").on("click", function () {
+//   // Get nearby values of the description in jQuery
+//   var textValue = $(this).siblings(".description").val();
+//   // Get the id attribute of the parent div element
+//   var timeId = $(this).parent().attr("id");
+//   // Save in local storage
+//   localStorage.setItem(timeId, textValue);
+// });
 
 
 const saveButtons = document.querySelectorAll(".saveBtn");
@@ -46,6 +46,24 @@ saveButtons.forEach(function (saveButton) {
     // console.log("saved");
   });
 });
+
+// Assuming you have a specific key for each time block (e.g., 'hour8', 'hour9', etc.)
+// Get the saved value from local storage when the page loads
+window.onload = function () {
+  const timeBlockIds = ['hour-8', 'hour-9', 'hour-10', 'hour-11', 'hour-12', 'hour-13', 'hour-14', 'hour-15', 'hour-16', 'hour-17'];
+
+  timeBlockIds.forEach(function (timeId) {
+    // Retrieve the saved value from local storage using the timeId as the key
+    const savedValue = localStorage.getItem(timeId);
+    
+    // Check if a value was found in local storage
+    if (savedValue !== null) {
+      // Populate the corresponding textarea with the saved value
+      document.querySelector("#" + timeId + " .description").value = savedValue;
+    }
+  });
+  // console.log("saved value displayed");
+};
 
 currentHour();
 setInterval(currentHour, 1000);    //refresh time every second
