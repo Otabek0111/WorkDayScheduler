@@ -35,9 +35,65 @@ function updateCurrentDate() {
     second: "2-digit",
   };
   const currentDate = new Date();
-  currentDayElement.textContent = currentDate.toLocaleDateString("en-US", dateForm);
+  currentDayElement.textContent = currentDate.toLocaleDateString(
+    "en-US",
+    dateForm
+  );
 }
 
 updateCurrentDate(); // Initial call to display the date/time immediately
 
 setInterval(updateCurrentDate, 1000); // Update the date every second
+
+
+
+// Function to check the time status (past, present, future)
+function checkTimeStatus(hour, isAM) {
+  const currentHour = new Date().getHours();
+  const hour24 = isAM ? hour : hour + 12; // Convert to 24-hour format if PM
+    
+  console.log(hour24);
+  console.log(currentHour);
+
+  if (hour24 < currentHour) {
+    return 'past';
+
+  } else if (hour24 === currentHour ) {
+    return 'present';
+
+  } else if (hour24 > currentHour) {
+    return 'future';
+
+  } else {
+    return ''; // Default (no class applied)
+  }
+}
+
+
+
+
+const timeBlocks = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+
+function updateColorCoding() {
+  const currentHour = new Date().getHours(); // Get the current hour
+  const isAM = new Date().getHours() < 12; // Check if it's currently AM
+
+  timeBlocks.forEach((hour) => {
+    const timeBlockElement = document.getElementById(`hour-${hour}`);
+
+    console.log(timeBlockElement);
+
+    const timeStatus = checkTimeStatus(hour, isAM);
+
+    console.log(`Hour-${hour} Status: ${timeStatus}`);
+
+    
+    console.log(checkTimeStatus(hour, isAM));
+    // Remove all possible status classes before adding the correct one
+    timeBlockElement.classList.remove("past", "present", "future");
+
+    // Add the appropriate status class
+    timeBlockElement.classList.add(timeStatus);
+  });
+}
+updateColorCoding();
