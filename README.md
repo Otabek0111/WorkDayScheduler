@@ -73,7 +73,7 @@ Refresh the page, and the saved events will persist.
 ## Video Walkthrough
 For a detailed walkthrough of how to use the application and to see it in action, please refer to the Video Walkthrough.
 
-![Demo](./assets/demo.gif)
+![Demo](./Assets/demo.gif)
 
 
 ## Contributing
