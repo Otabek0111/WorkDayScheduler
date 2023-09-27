@@ -1,7 +1,6 @@
 function currentHour() {
   const time = moment();
   const timeEl = document.querySelector(".currentDay");
-
   timeEl.textContent = time.format("dddd MMMM Do, h:mm:ss a");
 }
 function timeBlock() {
@@ -34,6 +33,8 @@ $(".saveBtn").on("click", function () {
   // Save in local storage
   localStorage.setItem(timeId, textValue);
 });
+
+
 const saveButtons = document.querySelectorAll(".saveBtn");
 saveButtons.forEach(function (saveButton) {
   saveButton.addEventListener("click", function () {
@@ -45,6 +46,7 @@ saveButtons.forEach(function (saveButton) {
     // console.log("saved");
   });
 });
+
 currentHour();
 setInterval(currentHour, 1000);    //refresh time every second
 timeBlock();

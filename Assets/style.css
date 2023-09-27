@@ -34,6 +34,8 @@ textarea {
   background-color: #e1c7c7;
   color: #000000;
   border-top: 1px dashed #000000;
+  border-radius: 15px;
+
 }
 
 .past {
