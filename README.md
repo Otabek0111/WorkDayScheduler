@@ -63,12 +63,13 @@ Click the save button for a time block to save the event in local storage.
 Refresh the page, and the saved events will persist.
 
 ## Technologies Used
-HTML
-CSS
-JavaScript
-jQuery
-Local Storage
-moment.js (for date and time manipulation)
+- HTML
+- CSS
+- JavaScript
+- jQuery
+- Local Storage
+- moment.js (for date and time manipulation)
+
 ## Video Walkthrough
 For a detailed walkthrough of how to use the application and to see it in action, please refer to the Video Walkthrough.
 
