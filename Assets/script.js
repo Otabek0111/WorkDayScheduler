@@ -23,77 +23,62 @@ $(function () {
 
 // Get current date and time
 // Retrieve the current date and time and then display the current date in a format at the top of the page using the toLocaleDateString method.
-const currentDate = new Date();
-function updateCurrentDate() {
-  const currentDayElement = document.querySelector(".currentDay");
-  const dateForm = {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  };
-  const currentDate = new Date();
-  currentDayElement.textContent = currentDate.toLocaleDateString(
-    "en-US",
-    dateForm
-  );
+
+// const currentDate = new Date();
+// function updateCurrentDate() {
+//   const currentDayElement = document.querySelector(".currentDay");
+//   const dateForm = {
+//     weekday: "long",
+//     month: "long",
+//     day: "numeric",
+//     hour: "2-digit",
+//     minute: "2-digit",
+//     second: "2-digit",
+//   };
+//   const currentDate = new Date();
+//   currentDayElement.textContent = currentDate.toLocaleDateString(
+//     "en-US",
+//     dateForm
+//   );
+// }
+
+// updateCurrentDate(); // Initial call to display the date/time immediately
+
+// setInterval(updateCurrentDate, 1000); // Update the date every second
+
+function currentHour() {
+  const time = moment();
+  const timeEl = document.querySelector(".currentDay");
+
+  timeEl.textContent = time.format("dddd MMMM Do, h:mm:ss a");
 }
 
-updateCurrentDate(); // Initial call to display the date/time immediately
-
-setInterval(updateCurrentDate, 1000); // Update the date every second
-
+currentHour();
+setInterval(currentHour, 1000);
 
 
-// Function to check the time status (past, present, future)
-function checkTimeStatus(hour, isAM) {
-  const currentHour = new Date().getHours();
-  const hour24 = isAM ? hour : hour + 12; // Convert to 24-hour format if PM
-    
-  console.log(hour24);
-  console.log(currentHour);
+function timeBlock() {
+  const liveHour = moment().format("H"); // Use "H" to get the current hour in 24-hour format
+  console.log(liveHour);
 
-  if (hour24 < currentHour) {
-    return 'past';
+  const timeBlocks = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
 
-  } else if (hour24 === currentHour ) {
-    return 'present';
+  timeBlocks.forEach((block) => {
+    const timeBlockEl = document.getElementById(`hour-${block}`); // Assuming you have elements with IDs like "hour-8", "hour-9", etc.
+    console.log(block);
+    console.log(liveHour);
 
-  } else if (hour24 > currentHour) {
-    return 'future';
-
-  } else {
-    return ''; // Default (no class applied)
-  }
-}
-
-
-
-
-const timeBlocks = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
-
-function updateColorCoding() {
-  const currentHour = new Date().getHours(); // Get the current hour
-  const isAM = new Date().getHours() < 12; // Check if it's currently AM
-
-  timeBlocks.forEach((hour) => {
-    const timeBlockElement = document.getElementById(`hour-${hour}`);
-
-    console.log(timeBlockElement);
-
-    const timeStatus = checkTimeStatus(hour, isAM);
-
-    console.log(`Hour-${hour} Status: ${timeStatus}`);
-
-    
-    console.log(checkTimeStatus(hour, isAM));
-    // Remove all possible status classes before adding the correct one
-    timeBlockElement.classList.remove("past", "present", "future");
-
-    // Add the appropriate status class
-    timeBlockElement.classList.add(timeStatus);
+    if (block < liveHour) {
+      timeBlockEl.classList.add("past");
+      timeBlockEl.classList.remove("present", "future");
+    } else if (block == liveHour) { // Use == for loose comparison, as block and liveHour may have different data types
+      timeBlockEl.classList.add("present");
+      timeBlockEl.classList.remove("past", "future");
+    } else {
+      timeBlockEl.classList.add("future");
+      timeBlockEl.classList.remove("past", "present");
+    }
   });
 }
-updateColorCoding();
+
+timeBlock();
